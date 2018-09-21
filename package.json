@@ -1,0 +1,22 @@
+{
+  "name": "pocket-glendale-api",
+  "version": "1.0.0",
+  "description": "A good description of the app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Korbin Deary, Craig Scott, Edward Cox, Mampre Khodadad, Anri Arzumanyan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.1",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.28",
+    "mongoose": "^4.10.5",
+    "node-fetch": "^1.7.1",
+    "nodemon": "^1.11.0"
+  }
+}
