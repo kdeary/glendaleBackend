@@ -23,6 +23,7 @@ exports.get_calendar = function(req, res) {
         	let event = {
             date: month[0] + " " + $(dayChild).text().trim().split("\n")[0],
         		time: $(eventChild).find(".calendar_eventtime").text(),
+            link: "https://www.glendaleca.gov" + $(eventChild).find(".calendar_eventlink").attr("href"),
             name: $(eventChild).find(".calendar_eventlink").text()
         	};
 

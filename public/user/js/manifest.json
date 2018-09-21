@@ -1,0 +1,9 @@
+{
+  "name": "MyGlendale",
+  "icons": [
+    
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

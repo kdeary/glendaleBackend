@@ -2,6 +2,7 @@ let express = require('express');
 let cors = require('cors')
 let app = express();
 let port = process.env.PORT || 3663;
+let path = require('path');
 // let mongoose = require('mongoose');
 let bodyParser = require('body-parser');
 
@@ -22,7 +23,7 @@ adminRoutes.use((req, res, next) => {
   // -----------------------------------------------------------------------
   // authentication middleware
 
-  const auth = {login: 'admin', password: 'qdn92zw1'}; // change this
+  const auth = {login: 'admin', password: 'dangernoodle1'}; // change this
 
   // parse login and password from headers
   const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
@@ -42,9 +43,15 @@ adminRoutes.use((req, res, next) => {
 });
 
 app.use('/admin', adminRoutes);
+app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+app.use('/js', express.static(path.join(__dirname, 'public/user/js')));
 
 adminRoutes.get('/', function(req, res){
 	res.sendFile(__dirname + '/public/admin/index.html');
+});
+
+app.get('/', function(req, res){
+	res.sendFile(__dirname + '/public/user/index.html');
 });
 
 let routes = require('./api/routes/GDRoutes');
