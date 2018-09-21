@@ -6,6 +6,8 @@ let cheerio = require('cheerio');
 // let mongoose = require('mongoose');
 // let User = mongoose.model('User');
 
+let current_psa = "TEST PSA";
+
 exports.get_calendar = function(req, res) {
   fetch("https://streamlyne.stream:88/proxy?link=https://www.glendaleca.gov/residents/calendar").then(raw => raw.text()).then(function(html){
     let $ = cheerio.load(html);
@@ -32,5 +34,18 @@ exports.get_calendar = function(req, res) {
     res.json({
       events: days
     });
+  });
+};
+
+exports.get_psa = function(req, res) {
+  res.json({
+    psa: current_psa
+  });
+};
+
+exports.set_psa = function(req, res) {
+  current_psa = req.body.psa;
+  res.json({
+    psa: current_psa
   });
 };

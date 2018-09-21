@@ -6,4 +6,9 @@ module.exports = function(app) {
   app.route('/calendar/')
     // Get Glendale Calendar
     .get(GD.get_calendar);
+
+  app.route('/psa/')
+    // Get Glendale PSA
+    .get(GD.get_psa)
+    .post(GD.set_psa);
 };
