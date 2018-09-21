@@ -54,6 +54,11 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/public/user/index.html');
 });
 
+app.get('/events', function(req, res){
+	res.sendFile(__dirname + '/public/user/events.html');
+});
+
+
 let routes = require('./api/routes/GDRoutes');
 routes(app);
 
