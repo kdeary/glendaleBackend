@@ -11,28 +11,30 @@ let current_psa = "TEST PSA";
 exports.get_calendar = function(req, res) {
   fetch("https://streamlyne.stream:88/proxy?link=https://www.glendaleca.gov/residents/calendar").then(raw => raw.text()).then(function(html){
     let $ = cheerio.load(html);
-    let days = [];
+    let events = [];
+    let month = $(".current_month_title").text().trim().split(" ");
 
     Array.from($(".calendar.calendar_grid.calendar-mini-grid-grid tbody td:not(.calendar_othermonthday)")).forEach(function(dayChild, idx){
-    	let day = {
-    		date: $(dayChild).text().trim().split("\n")[0],
-        events: []
-    	};
-
       Array.from($(dayChild).find(".calendar_items .calendar_item")).forEach(function(eventChild, idx){
-      	let event = {
-      		time: $(eventChild).find(".calendar_eventtime").text(),
-          name: $(eventChild).find(".calendar_eventlink").text()
-      	};
+        let timeDiff = (new Date(month[0] + " " + $(dayChild).text().trim().split("\n")[0] + ", " + month[1]) - Date.now());
 
-        day.events.push(event);
+        console.log(timeDiff);
+        if(timeDiff > 0){
+        	let event = {
+            date: month[0] + " " + $(dayChild).text().trim().split("\n")[0],
+        		time: $(eventChild).find(".calendar_eventtime").text(),
+            name: $(eventChild).find(".calendar_eventlink").text()
+        	};
+
+          events.push(event);
+        }
       });
-
-      days.push(day);
     });
 
     res.json({
-      events: days
+      month: month[0],
+      year: month[1],
+      events: events
     });
   });
 };
